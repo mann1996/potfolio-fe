@@ -1,0 +1,130 @@
+<header>
+  <nav class="navbar">
+    <a href="#" class="navbar-brand" routerLink="/">
+      portfol<span>.</span>io
+    </a>
+    <!-- <form class="navbar-form">
+      <input type="text" class="search-input" placeholder="Search...." />
+      <button class="search-btn">
+        <fa-icon [icon]="['fas', 'search']"></fa-icon>
+      </button>
+    </form> -->
+    <ul class="navbar__links">
+      <li>
+        <a
+          href="#"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Discover
+        </a>
+      </li>
+      <li *ngIf="loggedInUser">
+        <a
+          href="#"
+          routerLink="/for-you"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          For You</a
+        >
+      </li>
+      <li *ngIf="!loggedInUser">
+        <a href="/login"> Sign in</a>
+      </li>
+      <li *ngIf="loggedInUser">
+        <a
+          href="/profile/{{ loggedInUser }}"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Profile</a
+        >
+      </li>
+      <li *ngIf="!loggedInUser">
+        <a href="/register"> or Sign up</a>
+      </li>
+    </ul>
+    <ul class="navbar__links navbar__links__icon">
+      <li>
+        <a
+          href="#"
+          routerLink="search"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span>
+            <fa-icon [icon]="['fas', 'search']"></fa-icon>
+          </span>
+        </a>
+      </li>
+    </ul>
+    <div class="navbar__dropdown" *ngIf="loggedInUser">
+      <a
+        href="#"
+        routerLink="/profile/{{ loggedInUser }}"
+        (mouseenter)="activateMenu()"
+        class="navbar__profile_thumb"
+        *ngIf="userDetails"
+        [ngStyle]="{
+          'background-image': 'url(' + userDetails.thumbnail + ')'
+        }"
+      >
+        <!-- <img src="../assets/images/profile.jpg" alt="profile_thumbnail" /> -->
+      </a>
+      <div
+        (mouseleave)="activateMenu()"
+        class="navbar__dropdown__menu"
+        [ngClass]="{ navbar__dropdown__menu_active: menuActive }"
+        *ngIf="userDetails"
+      >
+        <div class="navbar__dropdown_header">
+          <div
+            class="navbar__dropdown_header__thumb"
+            [ngStyle]="{
+              'background-image': 'url(' + userDetails.thumbnail + ')'
+            }"
+          ></div>
+          <div class="user_details" *ngIf="userDetails">
+            <div class="user_details__name">{{ userDetails.firstName }}</div>
+            <div class="user_details__email">{{ userDetails.user.email }}</div>
+          </div>
+        </div>
+        <div class="navbar__dropdown_body">
+          <ul>
+            <li>
+              <a href="#" routerLink="/profile/{{ loggedInUser }}">Profile</a>
+            </li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+        <div class="navbar__dropdown_footer">
+          <a href="#" (click)="signOut()">Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+
+<footer>
+  <ul class="footer__links">
+    <li><a href="/">Home</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+
+  <div class="copyright">
+    &copy; 2020 Jaspreet Singh
+  </div>
+  <div class="version">
+    Version 1.0
+  </div>
+</footer>

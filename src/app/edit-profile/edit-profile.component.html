@@ -1,0 +1,153 @@
+<div class="header box__container">
+  <span>{{ status }}</span>
+  <a href="#" routerLink="/profile/{{ userId }}">Back to Profile</a>
+</div>
+<section class="box__container">
+  <div class="thumb__upload">
+    <div
+      class="thumb__preview"
+      [ngStyle]="{ 'background-image': 'url(' + imgSrc + ')' }"
+    >
+      <!-- <img [src]="imgSrc" alt="profile_thumbnail" /> -->
+    </div>
+    <div class="thumb__upload__field">
+      <input
+        type="file"
+        accept="image/*"
+        #imageUploader
+        (change)="uploadImage($event)"
+      />
+      <button (click)="imageUploader.click()">Pick Image</button>
+    </div>
+  </div>
+
+  <div class="form__container" *ngIf="profileModel">
+    <div class="section__title">Basic Information</div>
+    <form [formGroup]="editProfileForm">
+      <div class="row">
+        <div class="form__group col-6">
+          <label for="firstName">first name</label>
+          <input type="text" formControlName="firstName" id="firstName" />
+          <div
+            id="errorFirstName"
+            class="text-danger"
+            *ngIf="
+              editProfileForm.get('firstName').invalid &&
+              editProfileForm.get('firstName').dirty
+            "
+          >
+            This Field is Required
+          </div>
+        </div>
+
+        <div class="form__group col-6">
+          <label for="lastName">last name</label>
+          <input type="text" formControlName="lastName" id="lastName" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="jobTitle">occupation</label>
+          <input type="text" formControlName="jobTitle" id="jobTitle" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="company">company</label>
+          <input type="text" formControlName="company" id="company" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="website">website</label>
+          <input type="text" formControlName="website" id="website" />
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="form__group col-4">
+          <label for="country">Country</label>
+          <select id="country" formControlName="country">
+            <option [ngValue]="null">select country</option>
+            <option *ngFor="let country of countries" [ngValue]="country">{{
+              country.name
+            }}</option>
+          </select>
+        </div>
+        <div class="form__group col-4">
+          <label for="state">state</label>
+          <select id="state" formControlName="state">
+            <option value="">select state</option>
+          </select>
+        </div>
+        <div class="form__group col-4">
+          <label for="location">location</label>
+          <input type="text" formControlName="location" id="location" />
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="customSectionTitle">section title</label>
+          <input
+            type="text"
+            formControlName="customSectionTitle"
+            id="customSectionTitle"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="customSectionContent">Description</label>
+          <textarea
+            formControlName="customSectionContent"
+            id="customSectionContent"
+            rows="5"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="section__title">Social Media</div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="instagram">instagram</label>
+          <input type="text" formControlName="instagram" id="instagram" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="facebook">facebook</label>
+          <input type="text" formControlName="facebook" id="facebook" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="twitter">twitter</label>
+          <input type="text" formControlName="twitter" id="twitter" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="linkedin">linkedin</label>
+          <input type="text" formControlName="linkedin" id="linkedin" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="youtube">youtube</label>
+          <input type="text" formControlName="youtube" id="youtube" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="soundcloud">soundcloud</label>
+          <input type="text" formControlName="soundcloud" id="soundcloud" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form__group col-12">
+          <label for="github">github</label>
+          <input type="text" formControlName="github" id="github" />
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

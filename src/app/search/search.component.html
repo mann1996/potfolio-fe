@@ -1,0 +1,27 @@
+<div class="search__input">
+  <label for="search_input">
+    <fa-icon [icon]="['fas', 'search']"></fa-icon>
+  </label>
+  <input
+    type="search"
+    id="search_input"
+    placeholder="Search portfol.io"
+    autocomplete="off"
+    [(ngModel)]="key"
+    (ngModelChange)="search()"
+  />
+  <div class="search__tabs">
+    <a href="#" (click)="showPosts($event)" [ngClass]="{ active: postActive }">
+      Posts
+    </a>
+    <a
+      href="#"
+      (click)="showPeople($event)"
+      [ngClass]="{ active: peopleActive }"
+      >People</a
+    >
+  </div>
+</div>
+<div class="search__results">
+  <router-outlet></router-outlet>
+</div>

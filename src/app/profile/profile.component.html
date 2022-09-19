@@ -1,0 +1,275 @@
+<div class="flex__container">
+  <div class="sidebar box__container">
+    <div class="profile__intro">
+      <div
+        class="profile__img"
+        *ngIf="userProfile.thumbnail"
+        [ngStyle]="{ 'background-image': 'url(' + userProfile.thumbnail + ')' }"
+      ></div>
+      <div class="profile__titles">
+        <div class="profile__titles__name">
+          {{ userProfile.firstName
+          }}<span *ngIf="userProfile.lastName">{{
+            " " + userProfile.lastName
+          }}</span>
+        </div>
+        <div class="profile__titles__occupation" *ngIf="userProfile.jobTitle">
+          {{ userProfile.jobTitle }}
+        </div>
+        <div class="profile__titles__company" *ngIf="userProfile.company">
+          {{ userProfile.company }}
+        </div>
+        <div class="profile__titles__website">
+          <a href="http://{{ userProfile.website }}" target="_BLANK">{{
+            userProfile.website
+          }}</a>
+        </div>
+        <!-- <div class="profile__titles__location" *ngIf="userProfile.location">
+          <a href="http://www.etcanada.com" target="_BLANK">
+            <div><fa-icon [icon]="['fas', 'map-marker-alt']"></fa-icon></div>
+            <span
+              >{{ userProfile.location.state.country.name }},
+              {{ userProfile.location.state.name }},
+              {{ userProfile.location.name }}</span
+            >
+          </a>
+        </div> -->
+      </div>
+    </div>
+    <div class="follow__btn" *ngIf="!userProfile.valid; else elseBlock">
+      <a
+        href="#"
+        [ngClass]="{ active: userProfile.followingStatus }"
+        (click)="toggleFollow($event)"
+      >
+        <span id="follow__btn_label">{{
+          userProfile.followingStatus ? "Following" : "Follow"
+        }}</span>
+      </a>
+    </div>
+    <ng-template #elseBlock>
+      <div class="follow__btn">
+        <a
+          href="#"
+          routerLink="{{ '/profile/' + userProfile.publicId + '/edit' }}"
+          ><span id="follow__btn__label">Edit Profile</span></a
+        >
+      </div>
+    </ng-template>
+
+    <div class="user__info">
+      <table>
+        <tr *ngIf="views > 0">
+          <td class="user__info__stat">Views</td>
+          <td class="user__info__stat_value">{{ views }}</td>
+        </tr>
+        <tr *ngIf="likes > 0">
+          <td class="user__info__stat">Likes</td>
+          <td class="user__info__stat_value">{{ likes }}</td>
+        </tr>
+        <tr *ngIf="userProfile.followers > 0">
+          <td class="user__info__stat">Followers</td>
+          <td class="user__info__stat_value">{{ userProfile.followers }}</td>
+        </tr>
+        <tr *ngIf="userProfile.following > 0">
+          <td class="user__info__stat">Following</td>
+          <td class="user__info__stat_value">{{ userProfile.following }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="user__social_links">
+      <a
+        href="{{ userProfile.facebook }}"
+        target="_BLANK"
+        *ngIf="userProfile.facebook"
+      >
+        <span class="user__social_links__icon">
+          <fa-icon [icon]="['fab', 'facebook-square']"></fa-icon>
+        </span>
+      </a>
+      <a
+        href="{{ userProfile.twitter }}"
+        target="_BLANK"
+        *ngIf="userProfile.twitter"
+      >
+        <span class="user__social_links__icon">
+          <fa-icon [icon]="['fab', 'twitter-square']"></fa-icon>
+        </span>
+      </a>
+      <a
+        href="{{ userProfile.instagram }}"
+        target="_BLANK"
+        *ngIf="userProfile.instagram"
+      >
+        <span class="user__social_links__icon">
+          <fa-icon [icon]="['fab', 'instagram-square']"></fa-icon>
+        </span>
+      </a>
+      <a
+        href="{{ userProfile.youtube }}"
+        target="_BLANK"
+        *ngIf="userProfile.youtube"
+      >
+        <span class="user__social_links__icon">
+          <fa-icon [icon]="['fab', 'youtube-square']"></fa-icon>
+        </span>
+      </a>
+      <a
+        href="{{ userProfile.github }}"
+        target="_BLANK"
+        *ngIf="userProfile.github"
+      >
+        <span class="user__social_links__icon">
+          <fa-icon [icon]="['fab', 'github-square']"></fa-icon>
+        </span>
+      </a>
+      <a
+        href="{{ userProfile.linkedin }}"
+        target="_BLANK"
+        *ngIf="userProfile.linkedin"
+      >
+        <span class="user__social_links__icon">
+          <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
+        </span>
+      </a>
+      <a
+        href="{{ userProfile.soundcloud }}"
+        target="_BLANK"
+        *ngIf="userProfile.soundcloud"
+      >
+        <span class="user__social_links__icon">
+          <fa-icon [icon]="['fab', 'soundcloud']"></fa-icon>
+        </span>
+      </a>
+    </div>
+    <div class="user__about" *ngIf="userProfile.customSectionContent">
+      <div class="user__about__title">{{ userProfile.customSectionTitle }}</div>
+      <div class="user__about__content">
+        <pre>{{ userProfile.customSectionContent }}</pre>
+      </div>
+    </div>
+    <div class="user__join_date" *ngIf="userProfile.joinedOn">
+      Member since:
+      {{
+        userProfile.joinedOn[0] +
+          " " +
+          userProfile.joinedOn[1] +
+          ", " +
+          " " +
+          userProfile.joinedOn[2]
+          | date: "MMMM d, y"
+          | uppercase
+      }}
+    </div>
+  </div>
+  <div class="post__container">
+    <div class="post__grid row">
+      <div
+        class="col col-lg-4 col-md-6 col-sm-12 col-xs-12 post__card"
+        *ngFor="let post of publicPosts"
+      >
+        <div
+          class="post__card__thumbnail"
+          [ngStyle]="{ 'background-image': 'url(' + post.thumbnail + ')' }"
+          *ngIf="post.isPublic"
+        >
+          <div *ngIf="!post.isPublic" class="private__icon">
+            <fa-icon [icon]="['fas', 'lock']"></fa-icon> Private
+          </div>
+          <a
+            href="#"
+            [routerLink]="['/post/editor']"
+            [queryParams]="{ id: post.id }"
+            class="post__action action__edit"
+            *ngIf="userProfile.valid"
+            >Edit Post</a
+          >
+          <button
+            class="post__action action__delete"
+            (click)="deletePost(post)"
+            *ngIf="userProfile.valid"
+          >
+            Delete Post
+          </button>
+
+          <div class="post__card__details">
+            <div class="post__card__details_info">
+              <a
+                href="#"
+                routerLink="/posts/{{ post.id }}"
+                class="info__title"
+                >{{ post.title }}</a
+              >
+            </div>
+            <div class="post__card__details_stats">
+              <span class="stat">
+                <fa-icon [icon]="['fas', 'eye']"> </fa-icon>
+                <span>{{ post.views }}</span>
+              </span>
+              <span class="stat">
+                <fa-icon [icon]="['fas', 'thumbs-up']"></fa-icon>
+                <span>{{ post.likes }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="post__card__thumbnail"
+          [ngStyle]="{ 'background-image': 'url(' + post.thumbnail + ')' }"
+          *ngIf="!post.isPublic && post.createdBy.publicId == loggedIn"
+        >
+          <div *ngIf="!post.isPublic" class="private__icon">
+            <fa-icon [icon]="['fas', 'lock']"></fa-icon> Private
+          </div>
+          <a
+            href="#"
+            [routerLink]="['/post/editor']"
+            [queryParams]="{ id: post.id }"
+            class="post__action action__edit"
+            *ngIf="userProfile.valid"
+            >Edit Post</a
+          >
+          <button
+            class="post__action action__delete"
+            (click)="deletePost(post)"
+            *ngIf="userProfile.valid"
+          >
+            Delete Post
+          </button>
+
+          <div class="post__card__details">
+            <div class="post__card__details_info">
+              <a
+                href="#"
+                routerLink="/posts/{{ post.id }}"
+                class="info__title"
+                >{{ post.title }}</a
+              >
+            </div>
+            <div class="post__card__details_stats">
+              <span class="stat">
+                <fa-icon [icon]="['fas', 'eye']"> </fa-icon>
+                <span>{{ post.views }}</span>
+              </span>
+              <span class="stat">
+                <fa-icon [icon]="['fas', 'thumbs-up']"></fa-icon>
+                <span>{{ post.likes }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col col-lg-4 col-md-6 col-sm-12 col-xs-12 post__card"
+        *ngIf="userProfile.valid"
+      >
+        <a class="post__create" [routerLink]="['/post/editor']">
+          <div class="plus_icon">
+            <fa-icon [icon]="['far', 'plus-square']"></fa-icon>
+          </div>
+          <div class="plus_text">Create New Post</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

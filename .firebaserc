@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "portfolio-mca2020": {
+      "hosting": {
+        "portfolio-frontend": [
+          "portfolio-mca2020"
+        ]
+      }
+    }
+  }
+}

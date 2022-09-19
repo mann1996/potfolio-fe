@@ -1,0 +1,161 @@
+<div class="post__container box__container">
+  <div class="post__header">
+    <span class="title">{{ post.title }}</span>
+    <span class="date" *ngIf="post.createdAt">
+      {{
+        post.createdAt[0] +
+          " " +
+          post.createdAt[1] +
+          ", " +
+          " " +
+          post.createdAt[2]
+          | date: "MMMM d, y"
+          | uppercase
+      }}
+    </span>
+  </div>
+  <div class="post__body">
+    <div class="post__body__content">
+      <div class="post__content__block" *ngFor="let block of postContents">
+        <div [ngSwitch]="block.type">
+          <div *ngSwitchCase="'header'">
+            <div [ngSwitch]="block.data.level">
+              <div *ngSwitchCase="1">
+                <h1>{{ block.data.text }}</h1>
+              </div>
+              <div *ngSwitchCase="2">
+                <h2>{{ block.data.text }}</h2>
+              </div>
+              <div *ngSwitchCase="3">
+                <h3>{{ block.data.text }}</h3>
+              </div>
+              <div *ngSwitchCase="4">
+                <h4>{{ block.data.text }}</h4>
+              </div>
+              <div *ngSwitchCase="5">
+                <h5>{{ block.data.text }}</h5>
+              </div>
+              <div *ngSwitchCase="6">
+                <h6>{{ block.data.text }}</h6>
+              </div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'paragraph'" [innerHtml]="block.data.text"></div>
+          <div *ngSwitchCase="'image'">
+            <div class="block__image">
+              <img [src]="block.data.file.url" />
+            </div>
+            <div class="block__image_caption">
+              {{ block.data.caption }}
+            </div>
+          </div>
+          <div *ngSwitchCase="'list'">
+            <div [ngSwitch]="block.data.style">
+              <div *ngSwitchCase="'unordered'">
+                <ul>
+                  <li *ngFor="let item of block.data.items">{{ item }}</li>
+                </ul>
+              </div>
+              <div *ngSwitchDefault>output2</div>
+            </div>
+          </div>
+          <div *ngSwitchCase="'embed'">
+            <div [ngSwitch]="block.data.service">
+              <div *ngSwitchCase="'youtube'">
+                <iframe
+                  width="{{ block.data.width }}"
+                  height="{{ block.data.height }}"
+                  [src]="block.data.embed | urlSanitizer"
+                  frameborder="0"
+                ></iframe>
+              </div>
+            </div>
+            <div class="embed_caption">{{ block.data.caption }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post__body__side_pane">
+      <div class="author__details" *ngIf="post.createdBy">
+        <div
+          class="author__thumb"
+          [ngStyle]="{
+            'background-image': 'url(' + post.createdBy.thumbnail + ')'
+          }"
+        ></div>
+        <div class="author_info" *ngIf="post.createdBy">
+          <a href="#" class="author_info__name">
+            {{ post.createdBy.firstName }}
+            <span *ngIf="post.createdBy.lastName">
+              {{ post.createdBy.lastName }}
+            </span>
+          </a>
+          <div class="author_info__email">{{ post.createdBy.user.email }}</div>
+        </div>
+      </div>
+      <div class="post__stats">
+        <div class="stat">
+          Views: <span>{{ post.views }}</span>
+        </div>
+        <div class="stat">
+          <button
+            class="like__button"
+            (click)="toggleLike()"
+            [ngClass]="{ active: post.isLiked }"
+          >
+            <span class="icon">
+              <fa-icon [icon]="['fas', 'thumbs-up']"></fa-icon>
+            </span>
+            <span> {{ post.likes }}</span>
+          </button>
+        </div>
+      </div>
+      <div class="post__comment_section">
+        <div class="total_comments">
+          <span>Total Comments:</span> {{ postComments.length }}
+        </div>
+        <div class="comment__form">
+          <textarea cols="30" rows="2" [(ngModel)]="content"></textarea>
+          <button (click)="postComment()" [disabled]="content.length <= 0">
+            Post
+          </button>
+        </div>
+        <div class="comment__list" *ngIf="postComments.length > 0">
+          <div class="comment" *ngFor="let comment of postComments">
+            <div class="user__info">
+              <div
+                class="user__thumbnail"
+                [ngStyle]="{
+                  'background-image': 'url(' + comment.createdBy.thumbnail + ')'
+                }"
+              ></div>
+              <div class="details">
+                <a href="#" class="name"
+                  >{{ comment.createdBy.firstName }}
+                  <span *ngIf="comment.createdBy.lastName">{{
+                    " " + comment.createdBy.lastName
+                  }}</span></a
+                >
+                <div class="date">
+                  {{
+                    comment.createdAt[0] +
+                      " " +
+                      comment.createdAt[1] +
+                      ", " +
+                      " " +
+                      comment.createdAt[2]
+                      | date: "MMMM d, y"
+                      | uppercase
+                  }}
+                </div>
+              </div>
+            </div>
+            <div class="comment_content">
+              {{ comment.content }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,194 @@
+@import "../../variables.scss";
+.post__container {
+  width: 100%;
+  padding: 0;
+
+  .post__header {
+    padding: 1rem;
+    .title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      padding-right: 0.5rem;
+      border-right: 1px solid #b4b4b4;
+    }
+    .date {
+      columns: #696969;
+    }
+    border-bottom: 1px solid #e7e7e7;
+    width: 100%;
+  }
+
+  .post__body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+
+    .post__body__content {
+      padding: 1rem;
+      border-right: 1px solid #e7e7e7;
+      width: 75%;
+      .post__content__block {
+        margin-bottom: 1rem;
+      }
+      ul,
+      ol {
+        padding: 1rem;
+      }
+      img {
+        width: 580px;
+      }
+    }
+
+    .post__body__side_pane {
+      padding: 1rem;
+      width: 25%;
+      .author__details {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .author__thumb {
+          width: 4rem;
+          height: 4rem;
+          overflow: hidden;
+          border-radius: 50%;
+          background-size: cover;
+          background-position: center;
+        }
+        .author_info {
+          margin-left: 1rem;
+
+          .author_info__name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: capitalize;
+            color: #000;
+            cursor: pointer;
+            pointer-events: all;
+          }
+          .author_info__email {
+            font-size: 0.8rem;
+            text-transform: lowercase;
+            color: #696969;
+          }
+        }
+      }
+
+      .post__stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        .like__button {
+          border: none;
+          color: #000;
+          font-size: 1rem;
+          padding: 0;
+          font-weight: 500;
+        }
+
+        .like__button:hover {
+          background: none;
+
+          .icon {
+            color: $primary;
+          }
+        }
+
+        .like__button.active {
+          .icon {
+            color: $primary;
+          }
+        }
+
+        .like__button:focus {
+          outline: none;
+        }
+
+        .stat {
+          font-weight: 500;
+          span {
+            font-weight: 400;
+            margin-left: 0.5rem;
+          }
+        }
+      }
+
+      .post__comment_section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .total_comments {
+          border-bottom: 1px solid #e7e7e7;
+          width: 100%;
+          padding-bottom: 0.5rem;
+          margin-bottom: 0.5rem;
+          span {
+            font-weight: 500;
+            margin-right: 0.5rem;
+          }
+        }
+
+        .comment__form {
+          margin-bottom: 1rem;
+          textarea {
+            height: auto;
+            margin-bottom: 1rem;
+          }
+        }
+
+        .comment__list {
+          width: 100%;
+          border-top: 1px solid #e7e7e7;
+          padding-top: 1rem;
+          .comment {
+            width: 100%;
+            margin-bottom: 2rem;
+            .user__info {
+              display: flex;
+              align-items: center;
+              margin-bottom: 0.5rem;
+              .user__thumbnail {
+                height: 3rem;
+                width: 3rem;
+                background-color: $primary;
+                background-size: cover;
+                background-position: center;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+              }
+              .details {
+                .name {
+                  font-size: 1rem;
+                  font-weight: 500;
+                  color: #000;
+                  text-decoration: underline;
+                }
+                .name:hover {
+                  color: $primary;
+                }
+                .date {
+                  font-size: 0.8rem;
+                  font-weight: 400;
+                  color: #696969;
+                }
+              }
+            }
+            .comment_content {
+              width: 90%;
+              padding: 0.5rem;
+              padding-left: 1rem;
+              margin-left: auto;
+              background-color: #e7e7e7;
+              border-radius: 20px;
+              border-top-left-radius: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+<div class="people__details" *ngFor="let profile of profileList">
+  <a
+    href="#"
+    class="people__details__thumbnail"
+    [ngStyle]="{
+      'background-image': 'url(' + profile.thumbnail + ')'
+    }"
+    *ngIf="profile.thumbnail; else nothumb"
+  ></a>
+  <ng-template #nothumb>
+    <a
+      href="#"
+      class="people__details__thumbnail"
+      [ngStyle]="{
+        'background-image': 'url()'
+      }"
+    ></a>
+  </ng-template>
+  <div class="people__details__info">
+    <a href="#" routerLink="/profile/{{ profile.publicId }}" class="info__name">
+      <span>{{ profile.firstName }}</span>
+      <span *ngIf="profile.lastName"> {{ profile.lastName }}</span>
+    </a>
+    <div class="info_occupation" *ngIf="profile.jobTitle">
+      {{ profile.jobTitle }}
+    </div>
+    <div
+      class="follow__btn"
+      *ngIf="profile.publicId != loggedIn.publicId; else elseBlock"
+    >
+      <button
+        (click)="toggleFollow(profile)"
+        [ngClass]="{ active: profile.followingStatus }"
+      >
+        <span id="follow__btn_label">{{
+          profile.followingStatus ? "Following" : "Follow"
+        }}</span>
+      </button>
+    </div>
+    <ng-template #elseBlock>
+      <div class="follow__btn">
+        <a href="#" routerLink="{{ '/profile/' + profile.publicId + '/edit' }}">
+          <span id="follow__btn__label">Edit Profile</span>
+        </a>
+      </div>
+    </ng-template>
+  </div>
+  <!-- <div class="people__details__posts">
+    <a
+      class="post__thumbnail"
+      [ngStyle]="{
+        'background-image': 'url(' + '../../assets/images/login_bg.jpg' + ')'
+      }"
+    >
+    </a>
+    <a
+      class="post__thumbnail"
+      [ngStyle]="{
+        'background-image': 'url(' + '../../assets/images/login_bg.jpg' + ')'
+      }"
+    >
+    </a>
+    <a
+      class="post__thumbnail"
+      [ngStyle]="{
+        'background-image': 'url(' + '../../assets/images/login_bg.jpg' + ')'
+      }"
+    >
+    </a>
+    <a
+      class="post__thumbnail"
+      [ngStyle]="{
+        'background-image': 'url(' + '../../assets/images/login_bg.jpg' + ')'
+      }"
+    >
+    </a>
+    <a
+      class="post__thumbnail"
+      [ngStyle]="{
+        'background-image': 'url(' + '../../assets/images/login_bg.jpg' + ')'
+      }"
+    >
+    </a>
+  </div> -->
+</div>

@@ -1,0 +1,35 @@
+<div class="bg"></div>
+<div class="brand">
+  portfol<span>.</span>io
+</div>
+<div class="login__form">
+  <h1>Sign In</h1>
+  <form (submit)="login()">
+    <div class="form__group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        [(ngModel)]="creds.email"
+        name="email"
+        id="email"
+        required
+      />
+    </div>
+    <div class="form__group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        [(ngModel)]="creds.password"
+        name="password"
+        id="password"
+        required
+      />
+    </div>
+    <div class="login__error" *ngIf="errorMsg">
+      {{ errorMsg }}
+    </div>
+    <button type="submit"><span *ngIf="isLoading"></span>Sign in</button>
+  </form>
+
+  <a href="#" routerLink="/register">Dont have an account, Create One Now</a>
+</div>

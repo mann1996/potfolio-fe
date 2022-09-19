@@ -1,0 +1,70 @@
+@import "../../variables.scss";
+
+.people__details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  .people__details__thumbnail {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 6rem;
+    width: 6rem;
+    margin-left: 1rem;
+    background-position: center;
+    background-size: cover;
+    background-color: $secondary;
+  }
+  .people__details__info {
+    margin-right: auto;
+    margin-left: 1rem;
+    .info__name {
+      display: block;
+      color: #262626;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .info__name:hover {
+      text-decoration: underline;
+    }
+    .follow__btn {
+      margin-top: 1rem;
+      button,
+      a {
+        font-size: 0.8rem;
+        background-color: $primary;
+        color: #fff;
+        padding: 0.3rem 1rem;
+        border: none;
+        border-radius: 3px;
+        transition: background-color 0.3s linear;
+      }
+
+      button.active {
+        background-color: #696969;
+      }
+      button:hover,
+      a:hover {
+        background-color: darken($color: $primary, $amount: 10%);
+      }
+    }
+  }
+  .people__details__posts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .post__thumbnail {
+      display: block;
+      width: 120px;
+      height: 6rem;
+      background-size: cover;
+      background-position: center;
+      border-radius: 3px;
+      margin-right: 0.5rem;
+    }
+  }
+}

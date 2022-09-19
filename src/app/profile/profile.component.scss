@@ -1,0 +1,274 @@
+@import "../../variables.scss";
+
+.flex__container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+
+  .sidebar {
+    width: 480px;
+    height: 100%;
+    .profile__intro {
+      .profile__img {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        background-size: cover;
+        background-position: center;
+        img {
+          width: 100%;
+        }
+      }
+      .profile__titles {
+        text-align: center;
+        text-transform: capitalize;
+        font-size: 1rem;
+        line-height: 1.4;
+        color: #696969;
+
+        .profile__titles__name {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: #000;
+        }
+        .profile__titles__website {
+          a {
+            text-transform: lowercase;
+            color: #696969;
+            text-decoration: underline;
+          }
+        }
+        .profile__titles__location {
+          margin-top: 1rem;
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #696969;
+            text-decoration: none;
+
+            div {
+              margin-right: 5px;
+              font-size: 12px;
+            }
+          }
+          a:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .follow__btn {
+      margin: 1.5rem auto;
+      text-align: center;
+      a {
+        background-color: $primary;
+        color: #fff;
+        padding: 0.5rem 2rem;
+        border-radius: 3px;
+        transition: background-color 0.3s linear;
+      }
+
+      a.active {
+        background-color: #696969;
+      }
+      a:hover {
+        background-color: darken($color: $primary, $amount: 10%);
+      }
+    }
+
+    .user__info {
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        td {
+          border-bottom: 1px solid #696969;
+          padding: 5px 0;
+        }
+        .user__info__stat {
+          text-align: left;
+        }
+        .user__info__stat_value {
+          text-align: right;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .user__social_links {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      a {
+        color: #000;
+        font-size: 2rem;
+        margin-right: 6px;
+      }
+      :last-child {
+        margin-right: 0;
+      }
+    }
+
+    .user__about {
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      .user__about__title {
+        font-weight: 600;
+      }
+      .user__about__content {
+        margin-top: 1rem;
+      }
+    }
+    .user__join_date {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      color: #696969;
+      margin-top: 1rem;
+    }
+
+    margin-bottom: 2rem;
+  }
+  .post__container {
+    width: 100%;
+    margin-left: 1rem;
+
+    .post__grid {
+      .post__card {
+        position: relative;
+        margin-bottom: 1rem;
+        .post__card__thumbnail {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 260px;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          transition: all 0.2s linear;
+          border-radius: 3px;
+          background-color: $primary;
+
+          .private__icon {
+            color: $danger;
+            background-color: #fff;
+            padding: 3px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+          }
+
+          .post__card__details {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            background-color: rgba(0, 0, 0, 0.5);
+            .post__card__details_info {
+              a {
+                display: block;
+                color: #fff;
+              }
+              a:hover {
+                text-decoration: underline;
+              }
+              .info__title {
+                font-size: 1rem;
+                font-weight: 500;
+              }
+              .info__author {
+                font-size: 0.8rem;
+              }
+            }
+            .post__card__details_stats {
+              .stat {
+                font-size: 0.8rem;
+                margin-left: 1rem;
+                color: #fff;
+              }
+              span {
+                color: #fff;
+                margin-left: 0.3rem;
+              }
+            }
+          }
+
+          .post__action {
+            padding: 0.5rem;
+            width: 50%;
+            text-align: center;
+            margin-bottom: 1rem;
+            border-radius: 3px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            pointer-events: none;
+            transition: all 0.3s ease-in;
+            opacity: 0;
+            transform: translateY(-1rem) rotateX(-45deg);
+          }
+          .action__edit {
+            color: #fff;
+            background-color: $primary;
+          }
+
+          .action__delete {
+            background-color: #fff;
+            color: $danger;
+          }
+        }
+        .post__card__thumbnail:hover {
+          box-shadow: inset 0px 0px 100px 50px rgba(0, 0, 0, 0.5);
+
+          .post__action {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0rem) rotateX(0deg);
+          }
+        }
+      }
+
+      .post__create {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 260px;
+        transition: all 0.2s linear;
+        border: 1px dashed #b7b7b7;
+        border-radius: 3px;
+        background-color: #fff;
+
+        .plus_icon {
+          font-size: 3rem;
+          color: #b7b7b7;
+        }
+        .plus_text {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #9e9e9e;
+        }
+      }
+      .post__create:hover {
+        background-color: darken($color: $grey, $amount: 5%);
+      }
+    }
+  }
+}
